@@ -1,0 +1,25 @@
+@import url('https://fonts.googleapis.com/css?family=Coiny');
+
+.top-bar-title {
+    font-family: 'Coiny', cursive;
+    font-size: 28px;
+    color: #0899db;
+    margin-top : 2px;
+    flex:30
+}
+
+.navHeader{
+    display:flex;
+    flex-direction:row;
+    height: 49px;
+}
+
+.signoutHeader{
+    color: #0899db;
+    font-size: 20px;
+    margin-right: 27px;
+    margin-top: 11px;
+    margin-bottom: 2px;
+
+}
+

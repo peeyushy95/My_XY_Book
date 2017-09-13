@@ -1,0 +1,78 @@
+
+
+<link href='https://fonts.googleapis.com/css?family=Roboto:900,900italic,500,400italic,100,700italic,300,700,500italic,100italic,300italic,400' rel='stylesheet' type='text/css'>
+<div id="fback"><div class="girisback"></div><div class="kayitback"></div></div>
+<div [ngClass]="textBoxClass">
+  <div [ngClass]="toplamClass">
+
+    <div class="left">
+      <div id="ic">
+        <h2>Sign Up</h2>
+        <form id="girisyap" name="signup_form" id="signup_form" method="post" enctype="multipart/form-data" onsubmit="return false;">
+
+          <div class="yarim form-group">
+            <input type="text" name="signup_username" id="signup_username"  class="leftInput" placeholder="Username" cols="50" rows="10" >
+          </div>
+          <div class="yarim sn form-group">
+            <input type="text" name="field_1" id="field_1" value="" class="leftInput" placeholder="Full Name" cols="50" rows="10">
+          </div>
+          <div class="form-group">
+              <input type="text" name="signup_email" id="signup_email" class="leftInput" placeholder="Email"  cols="50" rows="10">
+          </div>
+          <div class="form-group">
+            <input type="password" name="signup_password" id="signup_password" class="leftInput" value=""   placeholder="Password" cols="50" rows="10" >
+          </div>
+          <input type="submit" class="myclass" value="Sign Up"  tabindex="100" />
+        </form>
+        <button id="moveright" (click)=moveright()>Login</button>
+      </div>
+    </div>
+
+    <div class="right">
+      <div id="ic">
+
+        <h2>Login</h2>
+        
+        <form name="login-form" id="girisyap" method="post" onsubmit="return false;">
+          <div class="form-group">         
+            <input type="text" name="log" placeholder="Username"  cols="50" rows="10" required>
+          </div>
+          <div class="form-group soninpt">
+            <input type="password" name="pwd" placeholder="Password" cols="50" rows="10" required>
+          </div>
+          <input type="submit" value="Login" class="girisbtn" tabindex="100" />
+        </form>
+        <button id="moveleft" (click)=moveleft()>Sign Up</button>
+      </div>
+    </div>  
+    <div class="googleLogin">
+      <h4 style="margin-left: 87px;color: #f91313;">-----OR-----</h4>      
+      
+      <!-- <div id="googleBtn" class="g-signin2" data-onsuccess="onSignIn"></div> -->
+
+      <div _ngcontent-c2="" data-gapiscan="true" data-onload="true" id="customBtn">
+        <div _ngcontent-c2="" 
+              class="abcRioButton abcRioButtonLightBlue" 
+              style="height:36px;width:120px;" 
+              ng-reflect-class-base="abcRioButton abcRioButtonLight">
+          <div _ngcontent-c2="" 
+                    class="abcRioButtonContentWrapper" 
+                    style="flex: 1;display: flex;" ng-reflect-class-base="abcRioButtonContentWrapper">
+            <div _ngcontent-c2="" 
+                  class="abcRioButtonIcon" 
+                  style="padding:8px" 
+                  ng-reflect-class-base="abcRioButtonIcon">
+                <div _ngcontent-c2="" 
+                      class="abcRioButtonSvgImageWithFallback abcRioButtonIconImage abcRioButtonIconImage18" 
+                      style="width:18px;height:18px;" 
+                      ng-reflect-class-base="abcRioButtonSvgImageWithFallba">
+                    <svg _ngcontent-c2="" 
+                        class="abcRioButtonSvg" height="18px" version="1.1" viewBox="0 0 48 48" width="18px" xmlns="http://www.w3.org/2000/svg" ng-reflect-class-base="abcRioButtonSvg"><g _ngcontent-c2=""><path _ngcontent-c2="" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z" fill="#EA4335"></path><path _ngcontent-c2="" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z" fill="#4285F4"></path><path _ngcontent-c2="" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z" fill="#FBBC05"></path><path _ngcontent-c2="" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z" fill="#34A853"></path><path _ngcontent-c2="" d="M0 0h48v48H0z" fill="none"></path></g></svg></div></div><span _ngcontent-c2="" class="abcRioButtonContents" style="font-size:13px;line-height:34px;" ng-reflect-class-base="abcRioButtonContents"><span _ngcontent-c2="" id="not_signed_in8qn2n8pz98co">Sign in</span><span _ngcontent-c2="" id="connected8qn2n8pz98co" style="display:none">Signed in</span></span></div></div></div>
+      <!-- <button id="customBtn" >Google SignIn</button> -->
+    </div>
+  </div>
+</div>
+
+
+  
+
