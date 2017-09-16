@@ -38,4 +38,12 @@ def loginUser(request):
     except crypt.AppIdentityError:
         raise crypt.AppIdentityError("Wrong issuer.")
 
+    #Fetch id from User table else create
+    user =  UsersInfo.objects.get(mail = resJSON['email'])
+
+    x = UsersInfo()
+    x.name ='Peeyush'
+    x.mail='2012ucp1687@mnit.ac.in'
+    x.save()
+
     return HttpResponse(json.dumps({'email': resJSON['email'],'id': 'number','username' : resJSON['name']}), content_type="application/json")
