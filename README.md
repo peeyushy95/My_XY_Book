@@ -9,4 +9,4 @@ Run `npm start` for a dev server. Navigate to `http://localhost:4200/`. The app 
 
 ## Running unit tests
 
-Run `ng test` to execute the unit tests via [Karma].
+Run `ng test` to execute the unit tests via Karma.
