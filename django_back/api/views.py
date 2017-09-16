@@ -21,6 +21,7 @@ def loginUser(request):
     token = json.loads(request.GET['updates'])['value']
     googleApiResponse = urllib.request.urlopen("https://www.googleapis.com/oauth2/v3/tokeninfo?id_token="+ token).read()
     resJSON = json.loads(googleApiResponse)
+
     try:
         idinfo = client.verify_id_token(token, None)
 
@@ -39,11 +40,16 @@ def loginUser(request):
         raise crypt.AppIdentityError("Wrong issuer.")
 
     #Fetch id from User table else create
-    user =  UsersInfo.objects.get(mail = resJSON['email'])
+    try :
+        user =  UsersInfo.objects.get(mail = resJSON['email'])
 
-    x = UsersInfo()
-    x.name ='Peeyush'
-    x.mail='2012ucp1687@mnit.ac.in'
-    x.save()
+    except UsersInfo.DoesNotExist:
 
-    return HttpResponse(json.dumps({'email': resJSON['email'],'id': 'number','username' : resJSON['name']}), content_type="application/json")
+        newUser = UsersInfo()
+        newUser.name = resJSON['name']
+        newUser.mail= resJSON['email']
+        newUser.save()
+        user = UsersInfo.objects.get(mail=newUser.mail)
+
+
+    return HttpResponse(json.dumps({'email': user.mail,'id': user.id,'username' : user.name}), content_type="application/json")
