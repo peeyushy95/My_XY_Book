@@ -1,5 +1,4 @@
 import {Injectable,NgZone} from '@angular/core';  
-
 import { Router } from '@angular/router';
 import {Subject} from 'rxjs/Subject';
 import {BackendService} from '../../services/backend.service'
@@ -12,7 +11,7 @@ declare const gapi: any;
     public auth2: any; 
     public loggedin: boolean;
     userStatus:Subject<boolean> = new Subject<boolean>();
-    user : User;
+    public user : User;
     errorMessage : any;
 
     constructor(private _backendService :BackendService,
@@ -47,16 +46,21 @@ declare const gapi: any;
           // console.log('Image URL: ' + profile.getImageUrl());
           // console.log('Email: ' + profile.getEmail()); 
           self.updateStatus(true);
-          
+
           self._backendService.loginUser(googleUser.getAuthResponse().id_token).subscribe(
             (user) => {
               self.user = user;
-              console.log("d" + user)
-            },(error) =>  self.errorMessage = <any>error
+              localStorage.setItem('currentUser', JSON.stringify(user));
+              self.router.navigateByUrl('topic');
+              location.reload();  
+            },(error) =>  {
+              self.errorMessage = <any>error
+              self.updateStatus(false);
+              self.router.navigateByUrl('login');
+              location.reload();  
+              localStorage.removeItem('currentUser');
+            }
           ); 
-
-          localStorage.setItem('currentUser', JSON.stringify({ username: profile.getName(), token: googleUser.getAuthResponse().id_token }));
-          self.router.navigateByUrl('u');
         });
     }
 
@@ -82,12 +86,12 @@ declare const gapi: any;
             that.router.navigateByUrl('');
             location.reload();  
             that.updateStatus(false);
-
          });
     }
 
     public isLoggedIn(){
       if(localStorage.getItem('currentUser')){
+        this.user = JSON.parse(localStorage.getItem('currentUser'));
         this.updateStatus(true);
         return true;
       }

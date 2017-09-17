@@ -1,0 +1,28 @@
+
+.topic{
+    background-color:white;
+    height: 100vh;
+}
+
+h2{
+    color: #0899db;
+    padding-top: 10px;
+    padding-left: 331px;
+    display: inline;
+}
+
+.flexClass{
+    display: flex;  
+    flex-direction: row;
+}
+
+.flexLeft{
+    padding-left: 10px;
+    margin-top: 150px;
+    flex:20
+}
+
+.flexRight{
+    margin-top: 10px;
+    flex:80
+}
