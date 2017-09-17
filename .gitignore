@@ -15,6 +15,7 @@ __pycache__
 
 # IDEs and editors
 /.idea
+.idea/
 .project
 .classpath
 .c9/
@@ -46,3 +47,4 @@ yarn-error.log
 # System Files
 .DS_Store
 Thumbs.db
+src/app/topic/topic.component.html
