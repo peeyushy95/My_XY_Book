@@ -1,18 +1,31 @@
-import { Component , Input} from '@angular/core';
+import { Component , Input, OnInit} from '@angular/core';
 import { loginService } from '../shared/authorization/login.service';  
 import {Topic} from '../models/topic.model';
 import {PanelComponent} from './dynamicPanel/panel.component';
-
+import {BookService} from './book.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'book-panel',
   templateUrl: './book.component.html',
   styleUrls: ['./book.component.css'],
-  providers : []
- })
-export class BookComponent { 
-  level = 1;
-  constructor(){
+  providers : [BookService]
+})
+
+export class BookComponent implements OnInit{ 
+  level = 10;
+  contact;
+  data :any;
+  constructor(_bookService :BookService, private route: ActivatedRoute){
+    // _bookService.getJSON().subscribe(
+    //   data => data=data, 
+    //   error => console.log(error));
+  }
+
+  ngOnInit() {
+    this.data = this.route.snapshot.data['bookData'];
+    //{PanelData: ["1","2"]};
+    //;this.route.snapshot.data['bookData'];
   }
 
 }

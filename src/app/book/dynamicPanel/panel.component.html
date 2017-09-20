@@ -1,18 +1,13 @@
-<md-expansion-panel>
-        <md-expansion-panel-header>
-            <md-panel-title>
-            Personal data
-            </md-panel-title>
-            <md-panel-description>
-            Type your name and age
-            </md-panel-description>
+<div *ngFor='let panelData of data?.PanelData'>
+       
+    <md-expansion-panel>
+        <md-expansion-panel-header style="background-color:rgb(232, 232, 232);">
+            <md-panel-title class="panelTitle">{{panelData.heading}}</md-panel-title>
+            <md-panel-description>.</md-panel-description>
+           
         </md-expansion-panel-header>
-        <dyn-panel *ngIf="level" [level]="level-1"></dyn-panel>
-        <md-form-field>
-            <input mdInput placeholder="First name">
-        </md-form-field>
-        
-        <md-form-field>
-            <input mdInput placeholder="Age">
-        </md-form-field>
+        <md-card>{{panelData.data}}</md-card>
+        <dyn-panel *ngIf="panelData.child" [data]="panelData.child"></dyn-panel> 
+       
     </md-expansion-panel>
+</div>

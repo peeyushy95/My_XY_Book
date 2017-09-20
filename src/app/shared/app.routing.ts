@@ -6,6 +6,7 @@ import { AuthGuard } from '../shared/authorization/authGuard.service';
 import { ErrorComponent } from '../error/error.component';
 import {TopicComponent} from '../topic/topic.component';
 import {BookComponent} from '../book/book.component';
+import { BookResolve } from '../book/bookResolve.component';
 
 @NgModule({
     imports: [
@@ -26,9 +27,10 @@ import {BookComponent} from '../book/book.component';
                 component: TopicComponent,
                 canActivate: [AuthGuard]},
             {
-                path: 'book',
+                path: 'book/:userId/:topicId',
                 component: BookComponent,
-                canActivate: [AuthGuard]},
+                canActivate: [AuthGuard],
+                resolve: {bookData: BookResolve}},
             {   
                 path: '**' , 
                 component: ErrorComponent 

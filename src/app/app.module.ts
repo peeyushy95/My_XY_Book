@@ -9,14 +9,16 @@ import {MdButtonModule, MdCheckboxModule,MdListModule,MdCardModule,MdInputModule
 
 import { NavComponent } from './shared/navbar.component';
 import { LoginComponent } from './login/login.component';
-import { TopicComponent} from './topic/topic.component';
-import {BookComponent} from './book/book.component';
+import { TopicComponent } from './topic/topic.component';
+import { BookComponent } from './book/book.component';
+import { BookService } from './book/book.service';
+import { BookResolve } from './book/bookResolve.component';
 import { ErrorComponent } from './error/error.component';
-import {TopicSorting} from "./topic/orderby.pipe";
-import {PanelComponent} from './book/dynamicPanel/panel.component';
+import { TopicSorting } from "./topic/orderby.pipe";
+import { PanelComponent } from './book/dynamicPanel/panel.component';
 import { loginService } from './shared/authorization/login.service';  
-import {AuthGuard} from './shared/authorization/authGuard.service';
-import {BackendService} from './services/backend.service';
+import { AuthGuard } from './shared/authorization/authGuard.service';
+import { BackendService } from './services/backend.service';
 
 
 @NgModule({
@@ -45,7 +47,7 @@ import {BackendService} from './services/backend.service';
         PanelComponent
     ],
     bootstrap: [ AppComponent,NavComponent ],
-    providers :[AuthGuard,BackendService,loginService]
+    providers :[AuthGuard,BackendService,loginService,BookResolve,BookService]
 })
 export class AppModule { 
    

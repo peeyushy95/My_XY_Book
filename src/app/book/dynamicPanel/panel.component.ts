@@ -9,11 +9,9 @@ import { Component , Input} from '@angular/core';
  })
 export class PanelComponent { 
   
-  @Input() level;
-
+  @Input() data;
   constructor(){
-    if(!this.level) this.level =4;
-    console.log("ddd" + this.level);
+      //console.log("vdfd" + this.data);
   }
 
 }
