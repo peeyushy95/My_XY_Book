@@ -3,7 +3,17 @@
     <md-expansion-panel>
         <md-expansion-panel-header style="background-color:rgb(232, 232, 232);">
             <md-panel-title class="panelTitle">{{panelData.heading}}</md-panel-title>
-            <md-panel-description>.</md-panel-description>
+            <md-panel-description>
+                    <button md-icon-button [mdMenuTriggerFor]="menu"  #menuTrigger="mdMenuTrigger" (mouseenter)="menuTrigger.openMenu()">
+                        Links
+                        <md-icon>more_vert</md-icon>                      
+                    </button>
+                    <md-menu #menu="mdMenu" >
+                        <button md-menu-item *ngFor='let link of panelData.Links; let i = index' (click)="openLink(link)" >
+                            <span>Link {{i+1}}</span> 
+                        </button>                     
+                    </md-menu>
+            </md-panel-description>
            
         </md-expansion-panel-header>
         <md-card>{{panelData.data}}</md-card>

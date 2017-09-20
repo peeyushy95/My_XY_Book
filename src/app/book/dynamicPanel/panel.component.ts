@@ -14,4 +14,7 @@ export class PanelComponent {
       //console.log("vdfd" + this.data);
   }
 
+  openLink(link){
+    window.open(link, "_blank");
+  }
 }

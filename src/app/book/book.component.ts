@@ -17,15 +17,10 @@ export class BookComponent implements OnInit{
   contact;
   data :any;
   constructor(_bookService :BookService, private route: ActivatedRoute){
-    // _bookService.getJSON().subscribe(
-    //   data => data=data, 
-    //   error => console.log(error));
   }
 
   ngOnInit() {
     this.data = this.route.snapshot.data['bookData'];
-    //{PanelData: ["1","2"]};
-    //;this.route.snapshot.data['bookData'];
   }
 
 }

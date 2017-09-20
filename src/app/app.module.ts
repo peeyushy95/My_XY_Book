@@ -5,7 +5,8 @@ import { AppComponent } from './start/app.component';
 import { HttpModule } from '@angular/http';
 import {FormsModule} from '@angular/forms';
 import { AppRoutingModule } from './shared/app.routing';
-import {MdButtonModule, MdCheckboxModule,MdListModule,MdCardModule,MdInputModule,MdExpansionModule,MdTabsModule} from '@angular/material';
+import {MdButtonModule, MdCheckboxModule,MdListModule,MdMenuModule} from '@angular/material';
+import {MdCardModule,MdInputModule,MdExpansionModule,MdTabsModule,MdIconModule} from '@angular/material';
 
 import { NavComponent } from './shared/navbar.component';
 import { LoginComponent } from './login/login.component';
@@ -26,11 +27,13 @@ import { BackendService } from './services/backend.service';
         BrowserModule,
         BrowserAnimationsModule,
         MdInputModule,
+        MdIconModule,
         MdButtonModule, 
         MdListModule,
         HttpModule,
         FormsModule,
         MdCardModule,
+        MdMenuModule,
         MdCheckboxModule,
         AppRoutingModule,
         MdExpansionModule,
