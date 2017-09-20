@@ -5,14 +5,15 @@ import { AppComponent } from './start/app.component';
 import { HttpModule } from '@angular/http';
 import {FormsModule} from '@angular/forms';
 import { AppRoutingModule } from './shared/app.routing';
-import {MdButtonModule, MdCheckboxModule,MdListModule,MdCardModule,MdInputModule} from '@angular/material';
+import {MdButtonModule, MdCheckboxModule,MdListModule,MdCardModule,MdInputModule,MdExpansionModule,MdTabsModule} from '@angular/material';
 
 import { NavComponent } from './shared/navbar.component';
 import { LoginComponent } from './login/login.component';
-import { TopicComponent} from './topic/topic.component'
+import { TopicComponent} from './topic/topic.component';
+import {BookComponent} from './book/book.component';
 import { ErrorComponent } from './error/error.component';
 import {TopicSorting} from "./topic/orderby.pipe";
-
+import {PanelComponent} from './book/dynamicPanel/panel.component';
 import { loginService } from './shared/authorization/login.service';  
 import {AuthGuard} from './shared/authorization/authGuard.service';
 import {BackendService} from './services/backend.service';
@@ -29,7 +30,9 @@ import {BackendService} from './services/backend.service';
         FormsModule,
         MdCardModule,
         MdCheckboxModule,
-        AppRoutingModule
+        AppRoutingModule,
+        MdExpansionModule,
+        MdTabsModule
     ],
     declarations: [
         AppComponent,
@@ -37,7 +40,9 @@ import {BackendService} from './services/backend.service';
         LoginComponent,
         TopicComponent,
         ErrorComponent,
-        TopicSorting
+        TopicSorting,
+        BookComponent,
+        PanelComponent
     ],
     bootstrap: [ AppComponent,NavComponent ],
     providers :[AuthGuard,BackendService,loginService]

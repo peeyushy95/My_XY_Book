@@ -1,6 +1,6 @@
 import { Component , OnInit} from '@angular/core';
 import { loginService } from '../shared/authorization/login.service';  
-import {TopicsService} from './topics.service'
+import {TopicsService} from './topics.service';
 import {Topic} from '../models/topic.model';
 
 

@@ -4,7 +4,8 @@ import { RouterModule } from '@angular/router';
 import { LoginComponent } from '../login/login.component';
 import { AuthGuard } from '../shared/authorization/authGuard.service';
 import { ErrorComponent } from '../error/error.component';
-import {TopicComponent} from '../topic/topic.component'
+import {TopicComponent} from '../topic/topic.component';
+import {BookComponent} from '../book/book.component';
 
 @NgModule({
     imports: [
@@ -23,6 +24,10 @@ import {TopicComponent} from '../topic/topic.component'
             {
                 path: 'topic',
                 component: TopicComponent,
+                canActivate: [AuthGuard]},
+            {
+                path: 'book',
+                component: BookComponent,
                 canActivate: [AuthGuard]},
             {   
                 path: '**' , 
