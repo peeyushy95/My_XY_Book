@@ -9,7 +9,7 @@
                         <md-icon>more_vert</md-icon>                      
                     </button>
                     <md-menu #menu="mdMenu" >
-                        <button md-menu-item *ngFor='let link of panelData.Links; let i = index' (click)="openLink(link)" >
+                        <button md-menu-item *ngFor='let link of panelData.links; let i = index' (click)="openLink(link)" >
                             <span>Link {{i+1}}</span> 
                         </button>                     
                     </md-menu>
@@ -18,6 +18,7 @@
         </md-expansion-panel-header>
         <md-card>{{panelData.data}}</md-card>
         <dyn-panel *ngIf="panelData.child" [data]="panelData.child"></dyn-panel> 
-       
+        
     </md-expansion-panel>
+    
 </div>

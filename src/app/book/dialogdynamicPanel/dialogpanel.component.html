@@ -1,0 +1,8 @@
+<div *ngFor='let panelData of data?.PanelData'>
+    <md-expansion-panel>
+        <md-expansion-panel-header >
+            <md-panel-title class="panelTitle">{{panelData.heading}}</md-panel-title>                     
+        </md-expansion-panel-header>
+        <dialog-dyn-panel *ngIf="panelData.child" [data]="panelData.child"></dialog-dyn-panel>        
+    </md-expansion-panel>    
+</div>

@@ -40,3 +40,23 @@ class TopicMap(models.Model):
             topicId=self.topic_id,
             mapDetails=self.mapDetails,
         )
+
+class TopicBook(models.Model):
+    topic = models.ForeignKey(Topics, on_delete=models.CASCADE)
+    heading = models.TextField()
+    type = models.TextField()
+    data = models.TextField()
+    links = JSONField()
+
+    class Meta:
+        db_table="topicBook"
+
+    def as_json(self):
+        return dict(
+            postId = self.id,
+            topicId = self.topic_id,
+            heading = self.heading,
+            type = self.type,
+            data = self.data,
+            links = self.links
+        )

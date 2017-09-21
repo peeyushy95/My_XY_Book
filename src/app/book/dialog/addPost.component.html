@@ -1,0 +1,12 @@
+<div style="position: static;pointer-events: auto;width: 100%;text-align: -webkit-center;">
+<h1 md-dialog-title>Insert Post</h1>
+<div md-dialog-content >
+  
+        <dialog-dyn-panel [data]="data"></dialog-dyn-panel>  
+</div>
+<div md-dialog-actions>
+  <button md-button [md-dialog-close]="data.animal" tabindex="2">Ok</button>
+  <button md-button (click)="onNoClick()" tabindex="-1">No Thanks</button>
+</div>
+
+</div>

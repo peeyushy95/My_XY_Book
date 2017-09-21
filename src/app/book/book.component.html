@@ -1,6 +1,8 @@
 <md-tab-group style="background-color: white;">
     <md-tab>
         <ng-template md-tab-label >Nested<em>Book</em>View</ng-template>
+        <button md-raised-button color="accent" style="background-color: #15b136;margin-bottom: 11px;margin-top: 5px;margin-left: 11px;" (click)="openDialog()">Add Post</button>
+        <button md-raised-button color="accent" style="background-color: red;" (click)="deleteTopic()">Delete Post</button>
         <dyn-panel [data]="data"></dyn-panel>        
     </md-tab>
     <md-tab>
