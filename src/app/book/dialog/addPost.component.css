@@ -1,3 +1,32 @@
 md-dialog-container {
     margin: auto;
 }
+
+.rowAlign{
+    flex-direction: row;
+}
+
+.bookStucBfrSlctd{
+    flex-direction: row;
+    visibility: visible;
+    width : 480px;
+    transition: width 1s;
+}
+
+.bookStucAfrSlctd{
+    transition: width 1s;
+    visibility: hidden;
+    width: 0px;
+ 
+}
+
+#alignClass{
+    display: flex;
+}
+
+.title{
+
+    font-size: 14px;
+    color: #00b6b6;
+
+}

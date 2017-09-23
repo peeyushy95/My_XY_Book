@@ -181,3 +181,6 @@ def loginUser(request):
         user = UsersInfo.objects.get(mail=newUser.mail)
 
     return HttpResponse(json.dumps({'email': user.mail,'id': user.id,'username' : user.name}), content_type="application/json")
+
+def createPost(request):
+    pass

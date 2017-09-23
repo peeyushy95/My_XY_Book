@@ -28,9 +28,10 @@ export class BookComponent implements OnInit{
 
   openDialog(): void {
     let dialogRef = this.dialog.open(AddPostDialog, {    
-      //width: '80%',
+      width: '80%',
+      height:'75%',
       //panelClass: 'my-full-screen-dialog', 
-      data: this.data
+      data: {parentMap: null, PanelData : this.data.PanelData ? this.data.PanelData  : null}
     });
 
     dialogRef.afterClosed().subscribe(result => {

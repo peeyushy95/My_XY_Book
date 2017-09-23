@@ -1,8 +1,38 @@
+<div *ngIf="data && data.PanelData">
+    <md-expansion-panel>
+        <md-expansion-panel-header  
+            [expandedHeight]="expandedHeight" [collapsedHeight]="expandedHeight"
+            style="height: 40px !important; font-size: 12px;"
+            (click)="myfunct('b',data.PanelData[0].parentMap)">
+                <md-panel-title class="createPost">Create Here</md-panel-title>                     
+        </md-expansion-panel-header>       
+    </md-expansion-panel>
+</div>
 <div *ngFor='let panelData of data?.PanelData'>
     <md-expansion-panel>
-        <md-expansion-panel-header >
-            <md-panel-title class="panelTitle">{{panelData.heading}}</md-panel-title>                     
+        <md-expansion-panel-header 
+            [expandedHeight]="expandedHeight" [collapsedHeight]="expandedHeight"
+            style="font-size: 12px;">
+                <md-panel-title class="panelTitle">{{panelData.heading}}</md-panel-title>                     
         </md-expansion-panel-header>
-        <dialog-dyn-panel *ngIf="panelData.child" [data]="panelData.child"></dialog-dyn-panel>        
-    </md-expansion-panel>    
+        <dialog-dyn-panel  (notify)="tempNotifier($event)" [data]="{parentMap: panelData.parentMap , PanelData:panelData.child?.PanelData}"></dialog-dyn-panel>        
+    </md-expansion-panel>   
+
+    <md-expansion-panel>
+        <md-expansion-panel-header  style="height: 40px !important; font-size: 12px;"
+        [expandedHeight]="expandedHeight" [collapsedHeight]="expandedHeight"
+        (click)="myfunct('a',panelData.parentMap)">
+            <md-panel-title class="createPost">Create Here</md-panel-title>                     
+        </md-expansion-panel-header>       
+    </md-expansion-panel>
+  
+</div>
+<div *ngIf="!data || !data.PanelData">
+    <md-expansion-panel>
+        <md-expansion-panel-header style="height: 40px !important; font-size: 12px;"
+        [expandedHeight]="expandedHeight" [collapsedHeight]="expandedHeight"
+        (click)="myfunct('u',data.parentMap)">
+            <md-panel-title class="createPost">Create Here</md-panel-title>                     
+        </md-expansion-panel-header>       
+    </md-expansion-panel>
 </div>

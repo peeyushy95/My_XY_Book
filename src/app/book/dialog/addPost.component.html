@@ -1,12 +1,28 @@
 <div style="position: static;pointer-events: auto;width: 100%;text-align: -webkit-center;">
-<h1 md-dialog-title>Insert Post</h1>
-<div md-dialog-content >
-  
-        <dialog-dyn-panel [data]="data"></dialog-dyn-panel>  
-</div>
-<div md-dialog-actions>
-  <button md-button [md-dialog-close]="data.animal" tabindex="2">Ok</button>
-  <button md-button (click)="onNoClick()" tabindex="-1">No Thanks</button>
-</div>
+    
+    <h1 md-dialog-title class="title">Create Post</h1>
+    <div md-dialog-content id="alignClass">
+        <md-card [ngClass]="meriClass" *ngIf="bookStructAvail">
+            <md-card-title class="title">Book Structure</md-card-title>
+            <md-card-content> 
+                <p>Click on click here to create post</p>
+                <dialog-dyn-panel (notify)="onPostSlctd($event)" [data]="data"></dialog-dyn-panel>  
+            </md-card-content>
+        
+        </md-card>
+        <md-card class="rowAlign" style="flex: 60;">
+                <md-card-title class="title">Insert Post</md-card-title>
+                <md-card-content> 
+                    <md-form-field class="example-full-width" style="display: block;padding-top: 10px;">
+                        <input mdInput [(ngModel)] ="heading" required placeholder="Heading">
+                    </md-form-field>
+                    <textarea [(ngModel)] ="postData" required style="margin: 0px;width: 600px;height: 300px;"></textarea>    
+                </md-card-content>
+        </md-card>
+    </div>
+    <div md-dialog-actions>
+    <button md-button md-raised-button color="accent" (click)="onOkClick()" tabindex="2" style="background-color: #15b136; margin-left: 80%;">Create</button>
+    <button md-button md-raised-button  color="accent" (click)="onNoClick()" tabindex="-1" style="background-color: red; margin-left: 17px;">Cancel</button>
+    </div>
 
 </div>

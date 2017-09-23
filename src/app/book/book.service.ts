@@ -14,6 +14,7 @@ export class BookService {
     public postDict = {};
     public bookData;
     public headingMap;
+    public parentMap = [];
 
     constructor(private http: Http) {}       
    
@@ -44,36 +45,6 @@ export class BookService {
           return promise;
     }
 
-    public createBookData(json_data){
-        json_data.forEach(e => {
-            this.postDict[e.postId] = e;
-        });
-
-        this.bookData = {};
-        this.headingMap = {}
-        var level = 1;
-        if(this.bookMap.mapDetails){
-            this.mapTheData(this.bookMap.mapDetails.data, this.bookData, level)
-            console.log(this.bookMap.data);
-        }
-    }
-
-    public mapTheData(parent, bookData, level){
-        parent.forEach(e => {
-            this.pushInBookData(e,bookData,level)
-            if(e.child){
-                bookData.PanelData[bookData.PanelData.length - 1].child = {};
-                this.mapTheData(e.child, bookData.PanelData[bookData.PanelData.length - 1].child, level+1);
-            }
-        });
-    }
-
-    public pushInBookData(data, bookData, level){
-        if(!bookData.level) bookData.level = level;
-        if(!bookData.PanelData) bookData.PanelData = [];
-        bookData.PanelData.push(this.postDict[data.id]);
-    }
-
     public getTopicMap(userId,topicId){
         this.bookMap = null;
         this.postDict = {};
@@ -97,4 +68,47 @@ export class BookService {
         });
         return promise;
     }
+
+
+    createPost(topicPayload): Observable<any>{
+        let headers = new Headers({ 'Content-Type': 'application/json' });
+        return this.http.post(this.prefixURL +'/createPost',topicPayload,{ headers: headers})
+                        .map((res:Response) => res.json())
+                        .catch((error:any) => Observable.throw(error.message || 'Server error'));
+    }
+
+
+    public createBookData(json_data){
+        json_data.forEach(e => {
+            this.postDict[e.postId] = e;
+        });
+
+        this.bookData = {};
+        this.headingMap = {}
+        this.parentMap = [];
+        if(this.bookMap.mapDetails){
+            this.mapTheData(this.bookMap.mapDetails.data, this.bookData,this.parentMap)
+            console.log(this.bookMap.data);
+        }
+    }
+
+    public mapTheData(parent, bookData, parentMap){
+        parent.forEach(e => {
+            parentMap.push(e.id);
+            this.pushInBookData(e,bookData,parentMap)
+            if(e.child){
+                bookData.PanelData[bookData.PanelData.length - 1].child = {};
+                this.mapTheData(e.child, bookData.PanelData[bookData.PanelData.length - 1].child, parentMap);
+            }
+            parentMap.pop();
+        });
+    }
+
+    public pushInBookData(data, bookData, parentMap){
+        if(!bookData.PanelData) bookData.PanelData = [];
+        this.postDict[data.id].parentMap  = Object.assign([], parentMap);
+        bookData.PanelData.push(this.postDict[data.id]);
+    }
+
+    
 }
