@@ -8,6 +8,7 @@ urlpatterns = [
     url(r'^deleteTopics$', views.deleteTopics),
     url(r'^topicData$', views.topicData),
     url(r'^getTopicMap$', views.getTopicMap),
+    url(r'^updateTopicMap$', views.updateTopicMap),
     url(r'^createPost$', views.createPost),
 
 ]

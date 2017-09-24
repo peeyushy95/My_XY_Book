@@ -46,7 +46,7 @@ class TopicBook(models.Model):
     heading = models.TextField()
     type = models.TextField()
     data = models.TextField()
-    links = JSONField()
+    links = JSONField(null=True)
 
     class Meta:
         db_table="topicBook"

@@ -6,7 +6,7 @@ import { HttpModule } from '@angular/http';
 import {FormsModule} from '@angular/forms';
 import { AppRoutingModule } from './shared/app.routing';
 import {MdButtonModule, MdCheckboxModule,MdListModule,MdMenuModule,MdDialogModule} from '@angular/material';
-import {MdCardModule,MdInputModule,MdExpansionModule,MdTabsModule,MdIconModule} from '@angular/material';
+import {MdCardModule,MdInputModule,MdExpansionModule,MdTabsModule,MdIconModule,MatTooltipModule} from '@angular/material';
 import { NavComponent } from './shared/navbar.component';
 import { LoginComponent } from './login/login.component';
 import { TopicComponent } from './topic/topic.component';
@@ -28,7 +28,8 @@ import { DialogPanelComponent } from './book/dialogdynamicPanel/dialogpanel.comp
         BrowserAnimationsModule,
         MdInputModule,
         MdIconModule,
-        MdButtonModule, 
+        MdButtonModule,
+        MatTooltipModule, 
         MdListModule,
         HttpModule,
         MdDialogModule,

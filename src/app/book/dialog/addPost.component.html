@@ -21,8 +21,18 @@
         </md-card>
     </div>
     <div md-dialog-actions>
-    <button md-button md-raised-button color="accent" (click)="onOkClick()" tabindex="2" style="background-color: #15b136; margin-left: 80%;">Create</button>
-    <button md-button md-raised-button  color="accent" (click)="onNoClick()" tabindex="-1" style="background-color: red; margin-left: 17px;">Cancel</button>
+            <button md-button md-raised-button 
+                color="accent" 
+                [disabled]="bookStructAvail"
+                (click)="onOkClick()"
+                tabindex="2" 
+                [md-dialog-close]="{'heading' : heading,'postData' :postData, 'postPos':newPostPosition}"
+                style="background-color: #15b136; margin-left: 80%;">
+                <span *ngIf= "bookStructAvail" mdTooltip="Please Select a Position to create Post">Create</span>
+                <span *ngIf= "!bookStructAvail">Create</span>
+            </button>
+
+        <button md-button md-raised-button  color="accent" (click)="onNoClick()" tabindex="-1" style="background-color: red; margin-left: 17px;">Cancel</button>
     </div>
 
 </div>

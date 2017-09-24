@@ -14,8 +14,9 @@ export class BookService {
     public postDict = {};
     public bookData;
     public headingMap;
+    public allPost;
     public parentMap = [];
-
+    public book = {show :true};
     constructor(private http: Http) {}       
    
 
@@ -24,7 +25,22 @@ export class BookService {
                         .map((res:any) => res.json())
                         .catch((error:any) => Observable.throw(error.message || 'Server error'));
     }
-    
+
+    createPost(topicPayload): Observable<any>{
+        let headers = new Headers({ 'Content-Type': 'application/json' });
+        return this.http.post(this.prefixURL +'/createPost',topicPayload,{ headers: headers})
+                        .map((res:Response) => res.json())
+                        .catch((error:any) => Observable.throw(error.message || 'Server error'));
+    }
+
+    public updateTopicMapInDB(bookMap){
+        let headers = new Headers({ 'Content-Type': 'application/json' });
+        this.http.post(this.prefixURL +'/updateTopicMap',bookMap,{ headers: headers})
+                        .map((res:Response) => res.json())
+                        .catch((error:any) => Observable.throw(error.message || 'Server error'))
+                        .subscribe({ error: e => console.error(e) });;
+    }
+
     public getTopicData(userId, topicId){
 
         let promise = new Promise((resolve, reject) => {
@@ -36,8 +52,8 @@ export class BookService {
               .toPromise()
               .then(
                 (res) => { 
-                    var data = res.json();
-                    this.createBookData(data);
+                    this.allPost = res.json();
+                    this.createBookData(this.allPost);
                     resolve(this.bookData);
                 }
               );
@@ -52,6 +68,7 @@ export class BookService {
         let promise = new Promise((resolve, reject) => {
             let headers = new Headers({ 'Content-Type': 'application/json' });
             let params = new HttpParams();
+            params = params.append("userId", userId);
             params = params.append("topicId", topicId);	
 
             this.http.get(this.prefixURL +'/getTopicMap',{ headers: headers ,params: params})
@@ -69,16 +86,8 @@ export class BookService {
         return promise;
     }
 
-
-    createPost(topicPayload): Observable<any>{
-        let headers = new Headers({ 'Content-Type': 'application/json' });
-        return this.http.post(this.prefixURL +'/createPost',topicPayload,{ headers: headers})
-                        .map((res:Response) => res.json())
-                        .catch((error:any) => Observable.throw(error.message || 'Server error'));
-    }
-
-
     public createBookData(json_data){
+        this.postDict = {};
         json_data.forEach(e => {
             this.postDict[e.postId] = e;
         });
@@ -110,5 +119,44 @@ export class BookService {
         bookData.PanelData.push(this.postDict[data.id]);
     }
 
-    
+    public updateMap(postPos, postId){
+        this.insertInMap(this.bookMap.mapDetails.data,postPos.map,0, postPos.comment,postId);
+        this.updateTopicMapInDB(this.bookMap);
+    }
+
+   
+
+    public insertInMap(map, path,pathId,comment,postId){
+        if(!path || (path.length) - pathId <= 1){
+            var ind = -1;
+            for(var i = 0; i < map.length; i++){
+                if(map[i].id === path[pathId]){
+                    ind = i;
+                    break;
+                }
+            }
+            //insert
+            var mapField = {'id' : postId};
+            if(comment === 'u'){
+                if(!path){
+                    map.push(mapField);
+                }else{
+                    map[ind].child = [mapField];
+                }
+            } else if(comment === 'a'){
+                map.splice(ind+1,0, mapField);
+            }else{
+                map.splice(ind,0, mapField);
+            }
+
+            this.createBookData(this.allPost);
+            return;
+        }
+        map.forEach(e => {
+            if(e.id === path[pathId]){
+                this.insertInMap(e.child, path,  pathId + 1,comment, postId);
+            }
+        });
+        
+    }
 }

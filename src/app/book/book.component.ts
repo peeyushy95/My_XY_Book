@@ -12,14 +12,19 @@ import {MdDialog, MdDialogRef, MD_DIALOG_DATA} from '@angular/material';
   selector: 'book-panel',
   templateUrl: './book.component.html',
   styleUrls: ['./book.component.css'],
-  providers : [BookService]
+  //providers : [BookService]
 })
 
 export class BookComponent implements OnInit{ 
   level = 10;
   contact;
   data :any;
-  constructor(_bookService :BookService, private route: ActivatedRoute, public dialog: MdDialog){
+  visible : any;
+  constructor(private _bookService :BookService, private route: ActivatedRoute, 
+    public dialog: MdDialog, 
+   // public routeS: ActivatedRouteSnapshot
+  ){
+    this.visible = _bookService.book;
   }
 
   ngOnInit() {
@@ -27,6 +32,7 @@ export class BookComponent implements OnInit{
   }
 
   openDialog(): void {
+    var self = this;
     let dialogRef = this.dialog.open(AddPostDialog, {    
       width: '80%',
       height:'75%',
@@ -35,6 +41,19 @@ export class BookComponent implements OnInit{
     });
 
     dialogRef.afterClosed().subscribe(result => {
+      console.log(result.postPos);
+      self._bookService.createPost({
+                          topicId :this.route.snapshot.params.topicId, 
+                          heading : result.heading, 
+                          postData : result.postData })
+                      .subscribe(
+                        (res) =>{
+                          self._bookService.allPost.push(res);
+                          self._bookService.updateMap(result.postPos,res.postId);
+                          self.data = self._bookService.bookData;
+                          console.log("hello");
+                        }
+                      );
       console.log('The dialog was closed');
     });
   }

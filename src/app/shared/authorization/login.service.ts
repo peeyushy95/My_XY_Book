@@ -83,7 +83,7 @@ declare const gapi: any;
           auth2.signOut().then(function () {
             console.log('User signed out.');
             localStorage.removeItem('currentUser');
-            that.router.navigateByUrl('');
+            that.router.navigateByUrl('/login');
             location.reload();  
             that.updateStatus(false);
          });

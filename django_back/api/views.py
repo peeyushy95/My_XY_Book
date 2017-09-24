@@ -36,6 +36,13 @@ def createTopic(request):
 
     return HttpResponse(json.dumps(topic.as_json()),content_type="application/json")
 
+def updateTopicMap(request):
+    body_unicode = request.body.decode('utf-8')
+    request_body = json.loads(body_unicode)
+    topicMap = TopicMap.objects.get(mapId=request_body['mapId'])
+    topicMap.mapDetails=request_body['mapDetails']
+    topicMap.save()
+    return HttpResponse(json.dumps({'done':True}), content_type="application/json")
 
 def topicContent(request):
     userId = json.loads(request.GET['updates'])['value']
@@ -49,13 +56,17 @@ def topicContent(request):
     return HttpResponse(json.dumps(results), content_type="application/json")
 
 def getTopicMap(request):
-    topicId = json.loads(request.GET['updates'])['value']
+    userId = json.loads(dict(request.GET.lists())['updates'][0])['value']
+    topicId = json.loads(dict(request.GET.lists())['updates'][1])['value']
 
     try :
         topicMap = TopicMap.objects.get(topic_id=topicId)
 
     except TopicMap.DoesNotExist:
         topicMap = TopicMap()
+        topicMap.topic_id = topicId
+        topicMap.mapDetails = {'data':[]};
+        topicMap.save()
 
     return HttpResponse(json.dumps(topicMap.as_json()), content_type="application/json")
 
@@ -71,79 +82,6 @@ def topicData(request):
 
     results = [ob.as_json() for ob in book]
     return HttpResponse(json.dumps(results), content_type="application/json")
-
-
-  #   return HttpResponse(json.dumps({
-  #
-  #   "level" : 10,
-  #   "PanelData" : [
-  #     {
-  #       "heading" : "Linear Regression",
-  #       "type" : "data/image",
-  #       "data" : "Regression is a parametric technique used to predict continuous (dependent) variable given a set of independent variables.Ordinary Least Square (OLS) technique tries to reduce the sum of squared errors ∑[Actual(y) - Predicted(y')]²/2n by finding the best possible value of regression coefficients (β0, β1, etc).There are other techniques such as Generalized Least Square, Percentage Least Square, Total Least Squares, Least absolute deviation",
-  #       "position" : 1,
-  #       "Links" : ["https://www.w3schools.com", "https://stackoverflow.com/questions/34338440/how-to-redirect-to-an-external-url-in-angular2"],
-  #       "child" : {
-  #         "level" : 9,
-  #         "PanelData" :
-  #         [
-  #           {
-  #             "heading" : "Batch Gradient Descent",
-  #             "Links" : ["11111111354546456645656jfdlkfjdlkfjdklfjdfkldsjfkdlsfjsdkflsjflksfjsklfjsdfsjfjlksfjskldfjsdlk4", "2"],
-  #             "type" : "data/image",
-  #             "data" : " BGD is not a good approach for large data set as it runs on whole training set. In SGD first randomize training set. Then, for updation of every parameter we use only one training example in every iteration to compute the gradient of cost function. Not accurate",
-  #             "position" : 1,
-  #             "child" : {
-  #               "level" : 9,
-  #               "PanelData" :
-  #               [
-  #                 {
-  #                   "heading" : "Decision Tree Regressor",
-  #                   "Links" : ["1", "2"],
-  #                   "type" : "data/image",
-  #                   "data" : "This is Non Linear, Non-Continuous model.Splits the data space into multiple regions and for a region predicted dependent variable is the average of the dependent variable of all the data samples within that region.",
-  #                   "position" : 1
-  #                 }
-  #               ]
-  #             }
-  #           },
-  #           {
-  #             "heading" : "MiniBatch Gradient Descent",
-  #             "Links" : [],
-  #             "type" : "data/image",
-  #             "data" : "In mini batch algorithm rather than using the complete data set, in every iteration we use a set of 'm' training examples called batch to compute the gradient of the cost function.",
-  #             "position" : 1
-  #           }
-  #         ]
-  #       }
-  #     },
-  #     {
-  #       "heading" : "Image Processing",
-  #       "Links" : [],
-  #       "type" : "data/image",
-  #       "data" : "what is Image Processing",
-  #       "position" : 2,
-  #       "child" : {
-  #         "level" : 9,
-  #         "PanelData" :
-  #         [
-  #           {
-  #             "heading" : "OpenCV",
-  #             "Links" : [],
-  #             "type" : "data/image",
-  #             "data" : "what is OpenCV",
-  #             "position" : 1
-  #           }
-  #         ]
-  #       }
-  #     },{
-  #       "heading" : "K-Means",
-  #       "type" : "data/image",
-  #       "data" : "what do u mean by Kmeans",
-  #       "position" : 3
-  #     }
-  #   ]
-  # }), content_type="application/json")
 
 
 def loginUser(request):
@@ -183,4 +121,12 @@ def loginUser(request):
     return HttpResponse(json.dumps({'email': user.mail,'id': user.id,'username' : user.name}), content_type="application/json")
 
 def createPost(request):
-    pass
+    body_unicode = request.body.decode('utf-8')
+    request_body = json.loads(body_unicode)
+
+    post = TopicBook()
+    post.heading = request_body['heading']
+    post.topic_id = request_body['topicId']
+    post.data = request_body['postData']
+    post.save()
+    return HttpResponse(json.dumps(post.as_json()),content_type="application/json")
