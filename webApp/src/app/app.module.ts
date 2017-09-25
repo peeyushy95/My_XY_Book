@@ -15,7 +15,7 @@ import { BookService } from './book/book.service';
 import {AddPostDialog} from './book/dialog/addPost.component';
 import { BookResolve } from './book/bookResolve.component';
 import { ErrorComponent } from './error/error.component';
-import { TopicSorting } from "./topic/orderby.pipe";
+import { TopicSorting } from "./topic/orderBy.pipe";
 import { PanelComponent } from './book/dynamicPanel/panel.component';
 import { loginService } from './shared/authorization/login.service';  
 import { AuthGuard } from './shared/authorization/authGuard.service';

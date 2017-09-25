@@ -1,0 +1,23 @@
+version: '3'
+
+services:
+  db:
+    image: postgres
+  web:
+    build: ./webApp
+    command : npm start
+    #volumes:
+    # - ./webApp:/code
+    ports :
+      - "4200:4200"
+    depends_on:
+     - services
+  services:
+    build: ./django_back/
+    command: bash -c "python manage.py makemigrations && python manage.py migrate && python3 manage.py runserver 0.0.0.0:8000"
+    volumes:
+     - ./django_back:/code
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
