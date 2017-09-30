@@ -5,10 +5,20 @@ Mybook is a digital book which user will be creating. User can create content, r
 
 1) Install Docker
 2) Start Docker
-3) Open My_XY_book folder. Run docker-compose up.
-4) Navigate to `http://localhost:8000/` in browser.
+3) Open My_XY_book folder. 
+4) Run docker-compose up. This will install all dependencies required for angular and django setup then starts severs.
+5) Navigate to `http://localhost:8000/` in browser.
 
-## Development server
+## Setup Without Docker
 
-Run `npm start` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+# Angular Setup
 
+1) Install Node.js
+2) go to My_XY_Book/webApp/
+3) Run npm install
+4) Run npm start
+
+# PostgreSQL Setup
+
+1) Install PostgreSQL
+2) Run at localhost:5432
