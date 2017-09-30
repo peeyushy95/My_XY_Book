@@ -11,14 +11,14 @@ Mybook is a digital book which user will be creating. User can create content, r
 
 ## Setup Without Docker
 
-# Angular Setup
+### Angular Setup
 
 1) Install Node.js
 2) go to My_XY_Book/webApp/
 3) Run npm install
 4) Run npm start
 
-# PostgreSQL Setup
+### PostgreSQL Setup
 
 1) Install PostgreSQL
 2) Run at localhost:5432
