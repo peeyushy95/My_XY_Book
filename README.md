@@ -5,11 +5,18 @@ Mybook is a digital book which user will be creating. User can create content, r
 
 1) Install Docker
 2) Start Docker
-3) Open My_XY_book folder. 
-4) Run docker-compose up. This will install all dependencies required for angular and django setup then starts severs.
-5) Navigate to `http://localhost:8000/` in browser.
+3) Open `My_XY_book` folder. 
+4) Run command `docker-compose up`. This will first install all required angular and django dependencies then starts severs.
+5) Navigate to `http://localhost:4200/` in browser.
 
 ## Setup Without Docker
+
+### PostgreSQL Setup
+
+1) Install PostgreSQL
+2) set `HOST (Line: 86)` field to `localhost` in `My_XY_Book/django_back/django_back/settings.py`
+3) configure PostgresSQL settings based on `DATABASES(Line: 82)` in `My_XY_Book/django_back/django_back/settings.py`
+4) Run at localhost:5432
 
 ### Angular Setup
 
@@ -18,7 +25,4 @@ Mybook is a digital book which user will be creating. User can create content, r
 3) Run npm install
 4) Run npm start
 
-### PostgreSQL Setup
-
-1) Install PostgreSQL
-2) Run at localhost:5432
+Navigate to `http://localhost:4200/` in browser.
