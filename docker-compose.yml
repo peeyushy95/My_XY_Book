@@ -12,13 +12,13 @@ services:
      - services
   services:
     build: ./django_back/
-    command: bash -c "echo backend_running; ./wait-for-it.sh db; python manage.py makemigrations;  python manage.py migrate; python3 manage.py runserver 0.0.0.0:8000;"
+    command: bash -c "echo backend_running; ./wait-for-it.sh dockerPostgresdb; python manage.py makemigrations;  python manage.py migrate; python3 manage.py runserver 0.0.0.0:8000;"
     volumes:
      - ./django_back:/code
     ports:
       - "8000:8000"
     depends_on:
-      - db
-  db:
+      - dockerPostgresdb
+  dockerPostgresdb:
     image: postgres
     #command : bash -c "echo postgres_running;"
