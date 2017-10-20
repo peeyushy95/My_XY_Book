@@ -15,7 +15,8 @@ Mybook is a digital book which user will be creating. User can create content, r
 
 1) Install PostgreSQL
 2) set `HOST (Line: 86)` field to `localhost` in `My_XY_Book/django_back/django_back/settings.py`
-3) configure PostgresSQL settings based on `DATABASES(Line: 82)` in `My_XY_Book/django_back/django_back/settings.py`
+3) configure PostgreSQL settings based on `DATABASES(Line: 82)` in `My_XY_Book/django_back/django_back/settings.py`
+4) if PostgreSQL is configured with password then add field : `'PASSWORD': 'your password'`
 4) Run at localhost:5432
 
 ### Angular Setup
